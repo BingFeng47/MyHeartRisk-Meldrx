@@ -131,7 +131,7 @@ export async function POST(req: Request, context: { params: Promise<{ id: string
       "hdlc": hdlc,
       "sex": sex === 'male' ? 0 : 1,
       "tc": tc,
-      "bpsys": bpsys > 140 ? 120 : bpsys,
+      "bpsys": 120,
       "bpsys_treatment": bpsys_treatment,
       "smoker": smoker,
       "diabetes": diabetes
