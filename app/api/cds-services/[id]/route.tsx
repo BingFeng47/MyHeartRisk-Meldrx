@@ -46,7 +46,7 @@ const getFrsScore = async (data: {
 }) => {
   try {
     console.log("pass data = " ,JSON.stringify(data))
-    const response = await fetch('https://4b48-175-41-160-219.ngrok-free.app/frs', {
+    const response = await fetch('https://c9e8-175-41-160-219.ngrok-free.app/frs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

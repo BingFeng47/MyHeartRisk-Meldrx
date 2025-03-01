@@ -88,7 +88,7 @@ export default function Callback() {
     setMessages([...messages, { text: input, sender: "user" }]);
     setInput("");
     
-    await fetch("https://4b48-175-41-160-219.ngrok-free.app/chatgpt", {
+    await fetch("https://c9e8-175-41-160-219.ngrok-free.app/chatgpt", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
