@@ -1,7 +1,7 @@
 import { XMLBuilder } from 'fast-xml-parser';
 import { uploadXmlToS3 } from './bucket';
 
-const fhirServerUrl = "https://app.meldrx.com/api/fhir/0f18e56b-25b4-4da3-a8fe-ea43ad612f92";
+const fhirServerUrl = "https://app.meldrx.com/api/fhir";
 
 interface FrsRiskProps {
     risk_category: string;
@@ -141,7 +141,7 @@ function generateXmlReport(patientId: string,patientName:any, patientDob:string,
     return builder.build(xmlData);
 }
 
-async function sendReport(patientId:string, accessToken:string, patientName:string, patientDob:string, patientGender:string, acsRisk:AcsRiskProps, frsRisk:FrsRiskProps) {
+async function sendReport(patientId:string, accessToken:string, patientName:string, patientDob:string, patientGender:string, acsRisk:AcsRiskProps, frsRisk:FrsRiskProps, workspaceId:string) {
     // Upload XML to a storage service and get the URL
     const xmlContent = generateXmlReport(patientId, patientName, patientGender, patientDob, acsRisk, frsRisk);
     const xmlUrl = await uploadXmlToS3(xmlContent); // Implement this function
@@ -184,7 +184,7 @@ async function sendReport(patientId:string, accessToken:string, patientName:stri
     };
 
     try {
-        const response = await fetch(`${fhirServerUrl}/DocumentReference`, {
+        const response = await fetch(`${fhirServerUrl}/${workspaceId}/DocumentReference`, {
             method: "POST",
             headers: {
                 "Accept": "application/json",

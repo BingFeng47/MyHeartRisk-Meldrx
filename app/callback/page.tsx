@@ -128,6 +128,7 @@ export default function Callback() {
     const [patientMedicationData, setPatientMedicationData] = useState<any>(null);
     const [patientConditionData, setPatientConditionData] = useState<any>(null);
     const [patientProcedureData, setPatientProcedureData] = useState<any>(null);;
+    const [workspace_id, setWorkSpaceId] = useState<any>(null);
 
     // Risk State
     const [frsRisk, setFrsRisk] = useState<frsRiskProps>({risk_category: "", probability: ""});
@@ -142,12 +143,15 @@ export default function Callback() {
             setPatientId(oidcResult.patient);
             setAccessToken(oidcResult.access_token);
 
+            const workspaceId = localStorage.getItem("workspace_id");
+            setWorkSpaceId(workspaceId);
+
             // Call FHIR Endpoints
-            const patientDetail = await getPatientDetails(oidcResult.patient, oidcResult.access_token);
-            const patientObservation = await getObservations(oidcResult.patient, oidcResult.access_token);
-            const patientMedication = await getMedications(oidcResult.patient, oidcResult.access_token);
-            const patientCondition = await getConditions(oidcResult.patient, oidcResult.access_token);
-            const patientProcedure = await getProcedures(oidcResult.patient, oidcResult.access_token);
+            const patientDetail = await getPatientDetails(oidcResult.patient, oidcResult.access_token, String(workspaceId));
+            const patientObservation = await getObservations(oidcResult.patient, oidcResult.access_token, String(workspaceId));
+            const patientMedication = await getMedications(oidcResult.patient, oidcResult.access_token, String(workspaceId));
+            const patientCondition = await getConditions(oidcResult.patient, oidcResult.access_token, String(workspaceId));
+            const patientProcedure = await getProcedures(oidcResult.patient, oidcResult.access_token, String(workspaceId));
 
             // Set State
             setPatientDetailData(patientDetail);
@@ -211,7 +215,7 @@ export default function Callback() {
               cardiaccath: cardiaccathProcedure? 1 : 0,
               statin: statinMedication? 1 : 0,
               lipidla: lipidlaMedication? 1 : 0
-            }
+            } 
 
             setAcsData(acsData);
 
@@ -230,6 +234,7 @@ export default function Callback() {
     
     // Connect and fetch patient data
     useEffect(() => {
+
       const urlParams = new URLSearchParams(window.location.search);
       const hasNewLogin = urlParams.has("code"); // Detect if OIDC login just happened
   
@@ -249,7 +254,7 @@ export default function Callback() {
           const oidc = new OidcClient({
             authority: "https://app.meldrx.com",
             client_id: "92ab67b9df5c445cabc89c476bcbfdab",
-            redirect_uri: "http://localhost:3000/callback",
+            redirect_uri: "https://cds-test.vercel.app/callback",
             response_type: "code",
             scope: "openid profile launch patient/*.* user/*.* system/*.* patient/Task.write patient/Bundle.write patient/Composition.write"
         });
@@ -371,7 +376,7 @@ export default function Callback() {
                             <Button 
                             variant="default" 
                             onClick={() => {
-                              sendReport(pateintId, accessToken, patientName, patientGender, patientDob, acsRisk, frsRisk);
+                              sendReport(pateintId, accessToken, patientName, patientGender, patientDob, acsRisk, frsRisk, String(workspace_id));
                               setDialogOpen(false);
                             }}
                             >

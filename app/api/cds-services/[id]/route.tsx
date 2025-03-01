@@ -150,7 +150,7 @@ export async function POST(req: Request, context: { params: Promise<{ id: string
         summary: `ACS Risk: ${frsScore.risk_category}`,
         detail: `Based on the Framingham Risk Score, this patient has a ${frsScore.probability} probability of developing heart disease in the next 10 years.`,
         links: [
-        { label: 'View more on MyHeartRisk', url: 'http://localhost:3000/launch', type: 'smart' },
+        { label: 'View more on MyHeartRisk', url: 'https://cds-test.vercel.app/launch', type: 'smart' },
         ],
       },
       ],

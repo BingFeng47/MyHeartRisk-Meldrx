@@ -1,10 +1,10 @@
-const fhirServerUrl = "https://app.meldrx.com/api/fhir/0f18e56b-25b4-4da3-a8fe-ea43ad612f92";
+const fhirServerUrl = "https://app.meldrx.com/api/fhir";
 
 // Function to get pateint details
-async function getPatientDetails(patientId: string, accessToken: string) {
-
+async function getPatientDetails(patientId: string, accessToken: string, workspaceId: string) {
+    console.log(workspaceId)
     // Workspace URL
-    const url = `${fhirServerUrl}/Patient/${patientId}`;
+    const url = `${fhirServerUrl}/${workspaceId}/Patient/${patientId}`;
 
     try {
         const response = await fetch(url, {
@@ -29,9 +29,9 @@ async function getPatientDetails(patientId: string, accessToken: string) {
 }
 
 // Function to get Observations
-async function getObservations(patientId: string, accessToken: string) {
+async function getObservations(patientId: string, accessToken: string, workspaceId: string) {
 
-    const url = `${fhirServerUrl}/Observation?patient=${patientId}`;
+    const url = `${fhirServerUrl}/${workspaceId}/Observation?patient=${patientId}`;
 
     try {
         const response = await fetch(url, {
@@ -89,9 +89,9 @@ async function getObservations(patientId: string, accessToken: string) {
 }
 
 // Function to get Medications
-async function getMedications(patientId: string, accessToken: string) {
+async function getMedications(patientId: string, accessToken: string, workspaceId: string) {
 
-    const url = `${fhirServerUrl}/MedicationStatement?patient=${patientId}`;
+    const url = `${fhirServerUrl}/${workspaceId}/MedicationStatement?patient=${patientId}`;
 
     try {
         const response = await fetch(url, {
@@ -148,9 +148,9 @@ async function getMedications(patientId: string, accessToken: string) {
 }
 
 // Function to get Conditions
-async function getConditions(patientId: string, accessToken: string) {
+async function getConditions(patientId: string, accessToken: string, workspaceId: string) {
 
-    const url = `${fhirServerUrl}/Condition?patient=${patientId}`;
+    const url = `${fhirServerUrl}/${workspaceId}/Condition?patient=${patientId}`;
 
     try {
         const response = await fetch(url, {
@@ -202,9 +202,9 @@ async function getConditions(patientId: string, accessToken: string) {
 }
 
 // Function to get Procedures
-async function getProcedures(patientId: string, accessToken: string) {
+async function getProcedures(patientId: string, accessToken: string, workspaceId: string) {
 
-    const url = `${fhirServerUrl}/Procedure?patient=${patientId}`;
+    const url = `${fhirServerUrl}/${workspaceId}/Procedure?patient=${patientId}`;
 
     try {
         const response = await fetch(url, {
