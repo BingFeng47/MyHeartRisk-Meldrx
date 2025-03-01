@@ -81,6 +81,9 @@ export default function Callback() {
 
   const  sendMessage = async() => {
     if (!input.trim()) return;
+
+    const workspaceId = localStorage.getItem("workspace_id");
+
     
     setMessages([...messages, { text: input, sender: "user" }]);
     setInput("");
@@ -97,7 +100,8 @@ export default function Callback() {
         acsRisk: acsRisk? acsRisk : null,
         frsRisk: frsRisk? frsRisk : null,
         accessToken: accessToken,
-        patientId: pateintId
+        patientId: pateintId,
+        workspaceID: workspaceId? workspaceId : null
       }),
     })
       .then((response) => response.json())
