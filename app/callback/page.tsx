@@ -88,7 +88,7 @@ export default function Callback() {
     setMessages([...messages, { text: input, sender: "user" }]);
     setInput("");
     
-    await fetch("http://127.0.0.1:8000/chatgpt", {
+    await fetch("http://175.41.160.219:8000/chatgpt", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

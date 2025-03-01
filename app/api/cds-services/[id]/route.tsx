@@ -46,7 +46,7 @@ const getFrsScore = async (data: {
 }) => {
   try {
     console.log("pass data = " ,JSON.stringify(data))
-    const response = await fetch('http://127.0.0.1:8000/frs', {
+    const response = await fetch('http://175.41.160.219:8000/frs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

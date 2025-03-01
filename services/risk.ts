@@ -1,4 +1,4 @@
-const base_url = "http://localhost:8000"
+const base_url = "http://175.41.160.219:8000"
 
 interface FRSData {
     age?: number,
