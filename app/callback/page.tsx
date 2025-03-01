@@ -97,11 +97,11 @@ export default function Callback() {
         prompt: input,
         session_id: "your-session-id", // Replace with actual session ID if available
         username: patientDetailData.name[0].given[0],
-        acsRisk: acsRisk? acsRisk : null,
+        acsRisk: acsRisk? acsRisk : null, 
         frsRisk: frsRisk? frsRisk : null,
         accessToken: accessToken,
         patientId: pateintId,
-        workspaceID: workspaceId? workspaceId : null
+        workspaceID: workspaceId? workspaceId : '0f18e56b-25b4-4da3-a8fe-ea43ad612f92'
       }),
     })
       .then((response) => response.json())
